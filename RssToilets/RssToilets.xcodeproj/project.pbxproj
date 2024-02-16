@@ -16,6 +16,14 @@
 		EA007A542B7F6B0E00E31ADA /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A532B7F6B0E00E31ADA /* AppDIContainer.swift */; };
 		EA007A562B7F6B5F00E31ADA /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A552B7F6B5F00E31ADA /* AppFlowCoordinator.swift */; };
 		EA007A582B7F6B9900E31ADA /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A572B7F6B9900E31ADA /* AppAppearance.swift */; };
+		EA007A5C2B7F6E8B00E31ADA /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A5B2B7F6E8B00E31ADA /* Endpoint.swift */; };
+		EA007A5E2B7F6F3200E31ADA /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A5D2B7F6F3200E31ADA /* APIEndpoints.swift */; };
+		EA007A602B7F729E00E31ADA /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A5F2B7F729E00E31ADA /* NetworkConfig.swift */; };
+		EA007A662B7F76AC00E31ADA /* RemoteToiletsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A652B7F76AC00E31ADA /* RemoteToiletsRequest.swift */; };
+		EA007A682B7F76B900E31ADA /* RemoteToilets.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A672B7F76B900E31ADA /* RemoteToilets.swift */; };
+		EA007A6B2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A6A2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift */; };
+		EA007A6E2B7F7C0F00E31ADA /* ToiletsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A6D2B7F7C0F00E31ADA /* ToiletsRepository.swift */; };
+		EA007A702B7F7D9B00E31ADA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A6F2B7F7D9B00E31ADA /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +57,14 @@
 		EA007A532B7F6B0E00E31ADA /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		EA007A552B7F6B5F00E31ADA /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		EA007A572B7F6B9900E31ADA /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
+		EA007A5B2B7F6E8B00E31ADA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		EA007A5D2B7F6F3200E31ADA /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		EA007A5F2B7F729E00E31ADA /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		EA007A652B7F76AC00E31ADA /* RemoteToiletsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteToiletsRequest.swift; sourceTree = "<group>"; };
+		EA007A672B7F76B900E31ADA /* RemoteToilets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteToilets.swift; sourceTree = "<group>"; };
+		EA007A6A2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletsRepositoryImpl.swift; sourceTree = "<group>"; };
+		EA007A6D2B7F7C0F00E31ADA /* ToiletsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletsRepository.swift; sourceTree = "<group>"; };
+		EA007A6F2B7F7D9B00E31ADA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +155,7 @@
 		EA007A4C2B7F671900E31ADA /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				EA007A6C2B7F7BF800E31ADA /* Interfaces */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -146,6 +163,9 @@
 		EA007A4D2B7F672400E31ADA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				EA007A692B7F7B3500E31ADA /* Repositories */,
+				EA007A5A2B7F6E7A00E31ADA /* Utilities */,
+				EA007A592B7F6D8700E31ADA /* Network */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -173,6 +193,50 @@
 				EA007A532B7F6B0E00E31ADA /* AppDIContainer.swift */,
 			);
 			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		EA007A592B7F6D8700E31ADA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A642B7F769000E31ADA /* DataMapping */,
+				EA007A5D2B7F6F3200E31ADA /* APIEndpoints.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		EA007A5A2B7F6E7A00E31ADA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A5B2B7F6E8B00E31ADA /* Endpoint.swift */,
+				EA007A5F2B7F729E00E31ADA /* NetworkConfig.swift */,
+				EA007A6F2B7F7D9B00E31ADA /* NetworkService.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EA007A642B7F769000E31ADA /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A652B7F76AC00E31ADA /* RemoteToiletsRequest.swift */,
+				EA007A672B7F76B900E31ADA /* RemoteToilets.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		EA007A692B7F7B3500E31ADA /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A6A2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		EA007A6C2B7F7BF800E31ADA /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A6D2B7F7C0F00E31ADA /* ToiletsRepository.swift */,
+			);
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,12 +369,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA007A6E2B7F7C0F00E31ADA /* ToiletsRepository.swift in Sources */,
+				EA007A662B7F76AC00E31ADA /* RemoteToiletsRequest.swift in Sources */,
+				EA007A682B7F76B900E31ADA /* RemoteToilets.swift in Sources */,
+				EA007A702B7F7D9B00E31ADA /* NetworkService.swift in Sources */,
+				EA007A5C2B7F6E8B00E31ADA /* Endpoint.swift in Sources */,
 				EA007A1F2B7F615D00E31ADA /* ViewController.swift in Sources */,
 				EA007A1B2B7F615D00E31ADA /* AppDelegate.swift in Sources */,
+				EA007A5E2B7F6F3200E31ADA /* APIEndpoints.swift in Sources */,
 				EA007A542B7F6B0E00E31ADA /* AppDIContainer.swift in Sources */,
 				EA007A512B7F69D200E31ADA /* AppConfiguration.swift in Sources */,
 				EA007A562B7F6B5F00E31ADA /* AppFlowCoordinator.swift in Sources */,
 				EA007A582B7F6B9900E31ADA /* AppAppearance.swift in Sources */,
+				EA007A6B2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift in Sources */,
+				EA007A602B7F729E00E31ADA /* NetworkConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
