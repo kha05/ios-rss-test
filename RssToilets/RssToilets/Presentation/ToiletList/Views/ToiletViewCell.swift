@@ -36,6 +36,27 @@ final class ToiletViewCell: UITableViewCell {
         return label
     }()
 
+    private lazy var stackViewIcon: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
+        stackView.spacing = .paddingSmall
+        return stackView
+    }()
+
+    private lazy var wcIcon: UILabel = {
+        let imageView = UILabel()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    private lazy var isAccessiblePrmIcon: UILabel = {
+        let imageView = UILabel()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
     // MARK: - Initialization
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,9 +79,14 @@ final class ToiletViewCell: UITableViewCell {
     // MARK: - Configure
 
     func configure(with viewModel: ToiletViewModel) {
-        addressLabel.text = viewModel.address
-        openingHourLabel.text = viewModel.openingHour
+        addressLabel.text = "📍 " + viewModel.address
+        openingHourLabel.text = "🕘 " + viewModel.openingHour
+        wcIcon.text = "🚾"
         distanceLabel.text = viewModel.distance
+        if viewModel.isPrmFriendly {
+            isAccessiblePrmIcon.text = "♿️"
+            stackViewIcon.addArrangedSubview(isAccessiblePrmIcon)
+        }
     }
 
 }
@@ -72,12 +98,16 @@ private extension ToiletViewCell {
         addressLabel.text = ""
         openingHourLabel.text = ""
         distanceLabel.text = ""
+        wcIcon.text = ""
+        isAccessiblePrmIcon.text = ""
     }
 
     func setupInterface() {
         contentView.addSubview(addressLabel)
         contentView.addSubview(openingHourLabel)
         contentView.addSubview(distanceLabel)
+        stackViewIcon.addArrangedSubview(wcIcon)
+        contentView.addSubview(stackViewIcon)
     }
 
     func setupConstraints() {
@@ -92,6 +122,11 @@ private extension ToiletViewCell {
             distanceLabel.topAnchor.constraint(equalTo: openingHourLabel.bottomAnchor, constant: .paddingSmall),
             distanceLabel.leadingAnchor.constraint(equalTo: openingHourLabel.leadingAnchor),
             distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.padding),
+
+            stackViewIcon.topAnchor.constraint(equalTo: openingHourLabel.topAnchor),
+            stackViewIcon.leadingAnchor.constraint(equalTo: openingHourLabel.trailingAnchor,
+                                                     constant: .padding),
+            stackViewIcon.bottomAnchor.constraint(equalTo: openingHourLabel.bottomAnchor)
         ])
     }
 }

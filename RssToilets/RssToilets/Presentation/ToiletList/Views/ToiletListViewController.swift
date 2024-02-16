@@ -8,6 +8,9 @@
 import UIKit
 
 final class ToiletListViewController: UIViewController {
+    enum Constant {
+        static let cellIdentifier = "cellIdentifier"
+    }
     // MARK: - Subviews
 
     private lazy var tableView: UITableView = {
@@ -19,7 +22,7 @@ final class ToiletListViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionFooterHeight = 0
-        tableView.register(ToiletViewCell.self, forCellReuseIdentifier: "cellIdentifier")
+        tableView.register(ToiletViewCell.self, forCellReuseIdentifier: Constant.cellIdentifier)
         return tableView
     }()
 
@@ -52,18 +55,18 @@ final class ToiletListViewController: UIViewController {
 
 extension ToiletListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return presenter.viewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! ToiletViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.cellIdentifier, for: indexPath) as! ToiletViewCell
         guard indexPath.row < presenter.viewModels.count - 1 else { return cell }
         cell.configure(with: presenter.viewModels[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
+        return 128
     }
 }
 
