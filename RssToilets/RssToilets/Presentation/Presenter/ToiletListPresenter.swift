@@ -8,12 +8,16 @@
 import Foundation
 
 protocol ToiletListPresenter {
+    var didUpdate: (([ToiletViewModel]) -> Void)? { get set }
+
     func fetchToilets()
 }
 
-final class ToiletListPresenterImpl: ToiletListPresenter, ObservableObject {
+final class ToiletListPresenterImpl: ToiletListPresenter {
     private let useCase: ToiletListUseCase
-    @Published private var viewModels: [ToiletViewModel] = []
+    private var viewModels: [ToiletViewModel] = []
+   
+    public var didUpdate: (([ToiletViewModel]) -> Void)? = nil
 
     init(useCase: ToiletListUseCase) {
         self.useCase = useCase
@@ -22,6 +26,7 @@ final class ToiletListPresenterImpl: ToiletListPresenter, ObservableObject {
     func fetchToilets() {
         Task.init {
             self.viewModels = await useCase.fetchToilets().map({ $0.toViewModel(with: nil) })
+            didUpdate?(viewModels)
         }
     }
 }
