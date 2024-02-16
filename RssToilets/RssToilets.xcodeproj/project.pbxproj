@@ -94,13 +94,12 @@
 		EA007A192B7F615D00E31ADA /* RssToilets */ = {
 			isa = PBXGroup;
 			children = (
-				EA007A1A2B7F615D00E31ADA /* AppDelegate.swift */,
-				EA007A1C2B7F615D00E31ADA /* SceneDelegate.swift */,
-				EA007A1E2B7F615D00E31ADA /* ViewController.swift */,
-				EA007A202B7F615E00E31ADA /* Main.storyboard */,
-				EA007A232B7F616000E31ADA /* Assets.xcassets */,
-				EA007A252B7F616000E31ADA /* LaunchScreen.storyboard */,
-				EA007A282B7F616000E31ADA /* Info.plist */,
+				EA007A4F2B7F676F00E31ADA /* Ressources */,
+				EA007A4E2B7F676900E31ADA /* Common */,
+				EA007A4D2B7F672400E31ADA /* Data */,
+				EA007A4C2B7F671900E31ADA /* Domain */,
+				EA007A4B2B7F670D00E31ADA /* Presentation */,
+				EA007A4A2B7F670500E31ADA /* Application */,
 			);
 			path = RssToilets;
 			sourceTree = "<group>";
@@ -111,6 +110,55 @@
 				EA007A312B7F616000E31ADA /* RssToiletsTests.swift */,
 			);
 			path = RssToiletsTests;
+			sourceTree = "<group>";
+		};
+		EA007A4A2B7F670500E31ADA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A1A2B7F615D00E31ADA /* AppDelegate.swift */,
+				EA007A1C2B7F615D00E31ADA /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		EA007A4B2B7F670D00E31ADA /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A1E2B7F615D00E31ADA /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		EA007A4C2B7F671900E31ADA /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		EA007A4D2B7F672400E31ADA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		EA007A4E2B7F676900E31ADA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		EA007A4F2B7F676F00E31ADA /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A232B7F616000E31ADA /* Assets.xcassets */,
+				EA007A202B7F615E00E31ADA /* Main.storyboard */,
+				EA007A282B7F616000E31ADA /* Info.plist */,
+				EA007A252B7F616000E31ADA /* LaunchScreen.storyboard */,
+			);
+			path = Ressources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,7 +475,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RssToilets/Info.plist;
+				INFOPLIST_FILE = RssToilets/Ressources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -454,7 +502,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RssToilets/Info.plist;
+				INFOPLIST_FILE = RssToilets/Ressources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
