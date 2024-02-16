@@ -24,6 +24,8 @@
 		EA007A6B2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A6A2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift */; };
 		EA007A6E2B7F7C0F00E31ADA /* ToiletsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A6D2B7F7C0F00E31ADA /* ToiletsRepository.swift */; };
 		EA007A702B7F7D9B00E31ADA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A6F2B7F7D9B00E31ADA /* NetworkService.swift */; };
+		EA007A742B7F9E0900E31ADA /* ToiletListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A732B7F9E0900E31ADA /* ToiletListUseCase.swift */; };
+		EA007A772B7F9EF100E31ADA /* Toilet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A762B7F9EF100E31ADA /* Toilet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		EA007A6A2B7F7B6900E31ADA /* ToiletsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletsRepositoryImpl.swift; sourceTree = "<group>"; };
 		EA007A6D2B7F7C0F00E31ADA /* ToiletsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletsRepository.swift; sourceTree = "<group>"; };
 		EA007A6F2B7F7D9B00E31ADA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		EA007A732B7F9E0900E31ADA /* ToiletListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletListUseCase.swift; sourceTree = "<group>"; };
+		EA007A762B7F9EF100E31ADA /* Toilet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toilet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,8 @@
 		EA007A4C2B7F671900E31ADA /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				EA007A752B7F9EE700E31ADA /* Entities */,
+				EA007A722B7F9DDE00E31ADA /* UseCases */,
 				EA007A6C2B7F7BF800E31ADA /* Interfaces */,
 			);
 			path = Domain;
@@ -237,6 +243,22 @@
 				EA007A6D2B7F7C0F00E31ADA /* ToiletsRepository.swift */,
 			);
 			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		EA007A722B7F9DDE00E31ADA /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A732B7F9E0900E31ADA /* ToiletListUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		EA007A752B7F9EE700E31ADA /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				EA007A762B7F9EF100E31ADA /* Toilet.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA007A742B7F9E0900E31ADA /* ToiletListUseCase.swift in Sources */,
 				EA007A6E2B7F7C0F00E31ADA /* ToiletsRepository.swift in Sources */,
 				EA007A662B7F76AC00E31ADA /* RemoteToiletsRequest.swift in Sources */,
 				EA007A682B7F76B900E31ADA /* RemoteToilets.swift in Sources */,
@@ -376,6 +399,7 @@
 				EA007A5C2B7F6E8B00E31ADA /* Endpoint.swift in Sources */,
 				EA007A1F2B7F615D00E31ADA /* ViewController.swift in Sources */,
 				EA007A1B2B7F615D00E31ADA /* AppDelegate.swift in Sources */,
+				EA007A772B7F9EF100E31ADA /* Toilet.swift in Sources */,
 				EA007A5E2B7F6F3200E31ADA /* APIEndpoints.swift in Sources */,
 				EA007A542B7F6B0E00E31ADA /* AppDIContainer.swift in Sources */,
 				EA007A512B7F69D200E31ADA /* AppConfiguration.swift in Sources */,

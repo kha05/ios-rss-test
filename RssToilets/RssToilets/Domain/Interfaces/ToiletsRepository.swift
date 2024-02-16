@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ToiletsRepository {
-    func fetchToilets(start: Int, rows: Int) async -> [RemoteToilet]
+    func fetchToilets(start: Int, rows: Int) async throws -> [RemoteToilet]
 }
