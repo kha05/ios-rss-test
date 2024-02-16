@@ -17,19 +17,19 @@ final class ToiletsRepositoryImpl {
 }
 
 extension ToiletsRepositoryImpl: ToiletsRepository {
-    func fetchToilets(start: Int, rows: Int) async -> [RemoteToilet] {
+    func fetchToilets(start: Int, rows: Int) async throws -> [RemoteToilet] {
         let request = RemoteToiletsRequest(start: start, rows: rows)
         do {
             let response: Result<RemoteToilets?, Error> = try await remoteSource.execute(endpoint: APIEndpoints.getToilets(with: request))
             switch response {
             case let .success(remoteData):
+                print(remoteData)
                 return remoteData?.records.compactMap({ $0.fields }) ?? []
-            case .failure(let failure):
-                print(NetworkError.servorError)
+            case .failure(let error):
+                throw error
             }
-        } catch {
-            print(NetworkError.servorError)
+        } catch(let error) {
+            throw error
         }
-        return []
     }
 }

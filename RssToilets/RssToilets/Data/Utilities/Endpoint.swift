@@ -8,7 +8,7 @@
 import Foundation
 
 enum HTTPMethodType: String {
-    case get     = "GET"
+    case get = "GET"
 }
 
 enum RequestGenerationError: Error {

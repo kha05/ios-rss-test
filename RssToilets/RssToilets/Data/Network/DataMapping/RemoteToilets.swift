@@ -7,21 +7,21 @@
 
 import Foundation
 
-// MARK: - RootToiletDTO
+// MARK: - RemoteToilets
 struct RemoteToilets: Decodable {
     let nhits: Int
     let parameters: RemoteParameters
     let records: [RemoteRecord]
 }
 
-// MARK: - Parameters
+// MARK: - RemoteParameters
 struct RemoteParameters: Decodable {
     let dataset: String
     let rows, start: Int
     let format, timezone: String
 }
 
-// MARK: - Record
+// MARK: - RemoteRecord
 struct RemoteRecord: Decodable {
     let datasetid: String
     let recordid: String
@@ -35,7 +35,7 @@ struct RemoteRecord: Decodable {
     }
 }
 
-// MARK: - Toilet
+// MARK: - RemoteToilet
 struct RemoteToilet: Decodable {
     let complementAdresse: RemoteComplementAdresse
     let geoShape: RemoteGeoShape
@@ -113,3 +113,4 @@ struct RemoteGeometry: Decodable {
 enum RemoteGeometryType: String, Decodable {
     case point = "Point"
 }
+
