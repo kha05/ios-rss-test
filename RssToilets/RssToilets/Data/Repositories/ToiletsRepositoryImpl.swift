@@ -8,6 +8,9 @@
 import Foundation
 
 final class ToiletsRepositoryImpl {
+    private enum Constant {
+        static let dataSet = "sanisettesparis2011"
+    }
 
     private let remoteSource: NetworkService
 
@@ -18,7 +21,11 @@ final class ToiletsRepositoryImpl {
 
 extension ToiletsRepositoryImpl: ToiletsRepository {
     func fetchToilets(start: Int, rows: Int) async throws -> [RemoteToilet] {
-        let request = RemoteToiletsRequest(start: start, rows: rows)
+        let request = RemoteToiletsRequest(
+            dataset: Constant.dataSet,
+            start: start,
+            rows: rows
+        )
         do {
             let response: Result<RemoteToilets?, Error> = try await remoteSource.execute(endpoint: APIEndpoints.getToilets(with: request))
             switch response {

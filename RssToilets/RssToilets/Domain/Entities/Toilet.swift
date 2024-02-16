@@ -18,9 +18,9 @@ struct Toilet {
 extension RemoteToilet {
     func toDomain() -> Toilet {
         return Toilet(
-            address: adresse,
-            openTime: horaire.rawValue,
-            pmrAccess: accesPmr.boolean,
+            address: adresse ?? "",
+            openTime: horaire?.rawValue ?? "",
+            pmrAccess: accesPmr?.boolean ?? false,
             geolocalisation: CLLocation(latitude: geoPoint2D[0], longitude: geoPoint2D[1])
         )
     }

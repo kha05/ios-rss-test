@@ -20,5 +20,9 @@ final class AppFlowCoordinator {
         self.appDIContainer = appDIContainer
     }
 
-    func start() {}
+    func start() {
+        let toiletsDIContainer = appDIContainer.makeToiletListDIContainer()
+        let flow = toiletsDIContainer.makeToiletsCoordinator(navigationController: navigationController)
+        flow.start()
+    }
 }

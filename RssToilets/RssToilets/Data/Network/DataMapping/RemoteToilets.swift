@@ -16,9 +16,13 @@ struct RemoteToilets: Decodable {
 
 // MARK: - RemoteParameters
 struct RemoteParameters: Decodable {
-    let dataset: String
+    let dataset: RemoteDataset
     let rows, start: Int
     let format, timezone: String
+}
+
+enum RemoteDataset: String, Codable {
+    case sanisettesparis2011 = "sanisettesparis2011"
 }
 
 // MARK: - RemoteRecord
@@ -27,7 +31,7 @@ struct RemoteRecord: Decodable {
     let recordid: String
     let fields: RemoteToilet
     let geometry: RemoteGeometry
-    let recordTimestamp: String
+    let recordTimestamp: RemoteRecordTimestamp
 
     enum CodingKeys: String, CodingKey {
         case datasetid, recordid, fields, geometry
@@ -39,13 +43,13 @@ struct RemoteRecord: Decodable {
 struct RemoteToilet: Decodable {
     let complementAdresse: RemoteComplementAdresse
     let geoShape: RemoteGeoShape
-    let horaire: RemoteHoraire
-    let accesPmr: RemoteAccesPmr
+    let horaire: RemoteHoraire?
+    let accesPmr: RemoteAccesPmr?
     let arrondissement: Int?
     let geoPoint2D: [Double]
     let source: String
     let gestionnaire: RemoteGestionnaire
-    let adresse: String
+    let adresse: String?
     let type: RemoteFieldsType
     let urlFicheEquipement: String?
     let relaisBebe: RemoteAccesPmr?
@@ -94,14 +98,22 @@ enum RemoteGestionnaire: String, Decodable {
 }
 
 enum RemoteHoraire: String, Decodable {
+    case the10H18H = "10h/18h"
+    case the10HA22H = "10h à 22h"
+    case the19H7H = "19 h - 7 h"
     case the24H24 = "24 h / 24"
+    case the6H1H = "6 h - 1 h"
     case the6H22H = "6 h - 22 h"
     case voirFicheÉquipement = "Voir fiche équipement"
 }
 
 enum RemoteFieldsType: String, Decodable {
+    case lavatory = "LAVATORY"
     case sanisette = "SANISETTE"
     case toilettes = "TOILETTES"
+    case urinoir = "URINOIR"
+    case urinoirFemme = "URINOIR FEMME"
+    case wcPublicsPermanents = "WC PUBLICS PERMANENTS"
 }
 
 // MARK: - Geometry
@@ -114,3 +126,6 @@ enum RemoteGeometryType: String, Decodable {
     case point = "Point"
 }
 
+enum RemoteRecordTimestamp: String, Codable {
+    case the20240204T051200494Z = "2024-02-04T05:12:00.494Z"
+}

@@ -4,7 +4,7 @@
 <dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>ApIBaseURL</key>
+	<key>ApiBaseURL</key>
 	<string>https://data.ratp.fr/api</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

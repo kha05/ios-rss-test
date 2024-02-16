@@ -41,9 +41,8 @@ class Endpoint<R>: Requestable {
 
 extension Requestable {
     func url(with config: NetworkConfigurable) throws -> URL {
-        let baseURL = config.baseURL.absoluteString + "/"
+        let baseURL = (config.baseURL?.absoluteString ?? "") + "/"
         let endpoint = baseURL.appending(path)
-        
         guard var urlComponents = URLComponents(string: endpoint) else { throw RequestGenerationError.components }
         var urlQueryItems = [URLQueryItem]()
 

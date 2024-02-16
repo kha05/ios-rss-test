@@ -57,6 +57,8 @@ extension ToiletListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath) as! ToiletViewCell
+        guard indexPath.row < presenter.viewModels.count - 1 else { return cell }
+        cell.configure(with: presenter.viewModels[indexPath.row])
         return cell
     }
 
@@ -86,7 +88,7 @@ private extension ToiletListViewController {
    }
 
     func bindToPresenter() {
-        presenter.didUpdate = { [weak self] toilets in
+        presenter.didUpdate = { [weak self] in
             self?.tableView.reloadData()
         }
     }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct RemoteToiletsRequest: Encodable {
+    let dataset: String
     let start: Int
     let rows: Int
 }
