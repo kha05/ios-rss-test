@@ -12,10 +12,10 @@ struct ToiletViewModel: Equatable {
     let address: String?
     let openingHour: String?
     let isPrmFriendly: Bool
-    let distance: String
+    let distanceFromToilet: Double?
 
     var adressText: String {
-        var text = "📍 "
+        var text = "🚽 "
         if let address {
             text +=  address.uppercased()
         } else {
@@ -38,18 +38,27 @@ struct ToiletViewModel: Equatable {
         isPrmFriendly ? "♿️" : nil
     }
 
-    var wcText: String {
-        "🚾"
+    var distanceText: String? {
+        guard let distanceFromToilet else {
+            return nil
+        }
+        var distanceString: String
+        if distanceFromToilet > 999 {
+            distanceString = "\(String(format:"%.02f", distanceFromToilet / 1000)) km"
+        } else {
+            distanceString = "\(String(format:"%.02f", distanceFromToilet)) m"
+        }
+        return "📍 \(distanceString)"
     }
 }
 
 extension Toilet {
-    func toViewModel(with location: CLLocation?) -> ToiletViewModel {
+    func toViewModel() -> ToiletViewModel {
         return ToiletViewModel(
             address: address,
             openingHour: openTime,
             isPrmFriendly: pmrAccess,
-            distance: ""
+            distanceFromToilet: currentPosition?.distance(from: geolocalisation)
         )
     }
 }

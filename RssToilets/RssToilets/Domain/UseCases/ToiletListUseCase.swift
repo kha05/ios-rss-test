@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol ToiletListUseCase {
-    func fetchToilets() async -> [Toilet]
+    func fetchToilets(from currentPosition: CLLocation?) async -> [Toilet]
 }
 
 final class ToiletListUseCaseImpl: ToiletListUseCase {
@@ -18,9 +19,9 @@ final class ToiletListUseCaseImpl: ToiletListUseCase {
         self.repository = repository
     }
 
-    func fetchToilets() async -> [Toilet] {
+    func fetchToilets(from currentPosition: CLLocation?) async -> [Toilet] {
         do {
-            return try await repository.fetchToilets(start: 0, rows: 1000).map({ $0.toDomain() })
+            return try await repository.fetchToilets(start: 0, rows: 1000).map({ $0.toDomain(with: currentPosition) })
         }
         catch(let error) {
             print(error)

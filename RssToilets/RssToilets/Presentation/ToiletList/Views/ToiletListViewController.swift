@@ -58,6 +58,11 @@ final class ToiletListViewController: UIViewController {
         setupInterface()
         presenter.fetchToilets()
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        presenter.didUpdate = nil
+    }
 }
 
 // MARK: Table view datasource
@@ -69,13 +74,13 @@ extension ToiletListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constant.cellIdentifier, for: indexPath) as! ToiletViewCell
-        guard indexPath.row < presenter.viewModelsFiltered.count - 1 else { return cell }
+        guard indexPath.row < presenter.viewModelsFiltered.count  else { return cell }
         cell.configure(with: presenter.viewModelsFiltered[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 128
+        return 140
     }
 }
 

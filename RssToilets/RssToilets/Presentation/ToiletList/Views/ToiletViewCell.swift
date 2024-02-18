@@ -40,15 +40,9 @@ final class ToiletViewCell: UITableViewCell {
         let stackView = UIStackView(frame: .zero)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillProportionally
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.spacing = .paddingSmall
         return stackView
-    }()
-
-    private lazy var wcIcon: UILabel = {
-        let imageView = UILabel()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
     }()
 
     private lazy var isAccessiblePrmIcon: UILabel = {
@@ -81,11 +75,12 @@ final class ToiletViewCell: UITableViewCell {
     func configure(with viewModel: ToiletViewModel) {
         addressLabel.text = viewModel.adressText
         openingHourLabel.text = viewModel.openingHourText
-        wcIcon.text = viewModel.wcText
-        distanceLabel.text = viewModel.distance
+        distanceLabel.text = viewModel.distanceText
         if viewModel.isPrmFriendly {
             isAccessiblePrmIcon.text = viewModel.prmText
             stackViewIcon.addArrangedSubview(isAccessiblePrmIcon)
+        } else {
+            stackViewIcon.removeArrangedSubview(isAccessiblePrmIcon)
         }
     }
 
@@ -98,35 +93,23 @@ private extension ToiletViewCell {
         addressLabel.text = ""
         openingHourLabel.text = ""
         distanceLabel.text = ""
-        wcIcon.text = ""
         isAccessiblePrmIcon.text = ""
     }
 
     func setupInterface() {
-        contentView.addSubview(addressLabel)
-        contentView.addSubview(openingHourLabel)
-        contentView.addSubview(distanceLabel)
-        stackViewIcon.addArrangedSubview(wcIcon)
+        stackViewIcon.addArrangedSubview(addressLabel)
+        stackViewIcon.addArrangedSubview(openingHourLabel)
+        stackViewIcon.addArrangedSubview(distanceLabel)
+        stackViewIcon.addArrangedSubview(isAccessiblePrmIcon)
         contentView.addSubview(stackViewIcon)
     }
 
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            addressLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .padding),
-            addressLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.padding),
-            addressLabel.topAnchor.constraint(equalTo: topAnchor, constant: .padding),
-
-            openingHourLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: .paddingSmall),
-            openingHourLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .padding),
-            openingHourLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-
-            stackViewIcon.topAnchor.constraint(equalTo: openingHourLabel.bottomAnchor, constant: .padding),
+            stackViewIcon.topAnchor.constraint(equalTo: topAnchor, constant: .padding),
             stackViewIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .padding),
             stackViewIcon.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.padding),
-
-            distanceLabel.topAnchor.constraint(equalTo: openingHourLabel.bottomAnchor, constant: .paddingSmall),
-            distanceLabel.leadingAnchor.constraint(equalTo: openingHourLabel.leadingAnchor),
-            distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.padding)
+            stackViewIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.padding)
         ])
     }
 }

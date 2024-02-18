@@ -18,8 +18,13 @@ final class AppDIContainer {
         return NetworkServiceImpl(config: config)
     }()
 
+    // MARK: - AppLocation
+    lazy var appLocation: AppLocation = {
+        AppLocationImpl()
+    }()
+
     // MARK: - DIContainers
     func makeToiletListDIContainer() -> ToiletsDIContainer {
-        ToiletsDIContainer(dependencies: .init(networkService: networkService))
+        ToiletsDIContainer(dependencies: .init(networkService: networkService, appLocation: appLocation))
     }
 }

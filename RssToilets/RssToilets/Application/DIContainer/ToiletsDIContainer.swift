@@ -12,6 +12,7 @@ final class ToiletsDIContainer: ToiletsCoordinatorDependencies {
 
     struct Dependencies {
         let networkService: NetworkService
+        let appLocation: AppLocation
     }
 
     private let dependencies: Dependencies
@@ -27,7 +28,7 @@ final class ToiletsDIContainer: ToiletsCoordinatorDependencies {
 
     // MARK: - Presenters
     func makeToiletListPresenter() -> ToiletListPresenter {
-        ToiletListPresenterImpl(useCase: makeToiletListUseCase())
+        ToiletListPresenterImpl(useCase: makeToiletListUseCase(), appLocation: dependencies.appLocation)
     }
 
     // MARK: - Repositories

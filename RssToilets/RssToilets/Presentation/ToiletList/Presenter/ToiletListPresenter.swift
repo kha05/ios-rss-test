@@ -7,8 +7,10 @@
 
 import Foundation
 
+typealias ToiletListPresenterCallback = (() -> Void)?
+
 protocol ToiletListPresenter {
-    var didUpdate: (() -> Void)? { get set }
+    var didUpdate: ToiletListPresenterCallback { get set }
     var viewModelsFiltered: [ToiletViewModel] { get set }
     var filterStatus: FilterStatus { get set }
 
@@ -18,6 +20,7 @@ protocol ToiletListPresenter {
 
 final class ToiletListPresenterImpl: ToiletListPresenter {
     private let useCase: ToiletListUseCase
+    private var appLocation: AppLocation
     private var viewModels: [ToiletViewModel] = []
     
     var viewModelsFiltered: [ToiletViewModel] = []
@@ -25,13 +28,16 @@ final class ToiletListPresenterImpl: ToiletListPresenter {
 
     public var didUpdate: (() -> Void)? = nil
 
-    init(useCase: ToiletListUseCase) {
+    init(useCase: ToiletListUseCase, appLocation: AppLocation) {
         self.useCase = useCase
+        self.appLocation = appLocation
+        self.appLocation.delegate = self
     }
 
     func fetchToilets() {
         Task.init {
-            self.viewModels = await useCase.fetchToilets().map({ $0.toViewModel(with: nil) })
+            let currentPosition = await appLocation.getUserLocation()
+            self.viewModels = await useCase.fetchToilets(from: currentPosition).map({ $0.toViewModel() })
             self.viewModelsFiltered = viewModels
             await MainActor.run {
                 didUpdate?()
@@ -52,5 +58,11 @@ final class ToiletListPresenterImpl: ToiletListPresenter {
             filterStatus = .all
         }
         didUpdate?()
+    }
+}
+
+extension ToiletListPresenterImpl: AppLocationDelegate {
+    func didUpdateLocation() {
+        fetchToilets()
     }
 }
