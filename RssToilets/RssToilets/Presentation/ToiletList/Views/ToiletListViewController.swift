@@ -26,6 +26,15 @@ final class ToiletListViewController: UIViewController {
         return tableView
     }()
 
+    private lazy var filterButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+            title: presenter.filterStatus.rawValue,
+            style: .done,
+            target: self,
+            action: #selector(updateFilter)
+        )
+    }()
+
     // MARK: - Dependencies
 
     private var presenter: ToiletListPresenter
@@ -55,13 +64,13 @@ final class ToiletListViewController: UIViewController {
 
 extension ToiletListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.viewModels.count
+        return presenter.viewModelsFiltered.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constant.cellIdentifier, for: indexPath) as! ToiletViewCell
-        guard indexPath.row < presenter.viewModels.count - 1 else { return cell }
-        cell.configure(with: presenter.viewModels[indexPath.row])
+        guard indexPath.row < presenter.viewModelsFiltered.count - 1 else { return cell }
+        cell.configure(with: presenter.viewModelsFiltered[indexPath.row])
         return cell
     }
 
@@ -80,19 +89,28 @@ extension ToiletListViewController: UITableViewDelegate {
 
 private extension ToiletListViewController {
     func setupInterface() {
-       view.addSubview(tableView)
+        navigationItem.rightBarButtonItem = filterButton
+        navigationItem.title = "Toilet list"
+        view.backgroundColor = .clear
+        view.addSubview(tableView)
 
-       NSLayoutConstraint.activate([
-           tableView.topAnchor.constraint(equalTo: view.topAnchor),
-           tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-           tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-           tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-       ])
-   }
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+    }
 
     func bindToPresenter() {
         presenter.didUpdate = { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+
+    @objc
+    func updateFilter() {
+        presenter.filter()
+        filterButton.title = presenter.filterStatus.rawValue
     }
 }

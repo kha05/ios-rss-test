@@ -32,6 +32,7 @@
 		EA007A832B7FAD4D00E31ADA /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A822B7FAD4D00E31ADA /* CGFloat+Extensions.swift */; };
 		EA007A852B7FB1D300E31ADA /* ToiletsDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A842B7FB1D300E31ADA /* ToiletsDIContainer.swift */; };
 		EA007A8B2B7FB40500E31ADA /* ToiletsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A8A2B7FB40500E31ADA /* ToiletsCoordinator.swift */; };
+		EA007A8D2B82162100E31ADA /* ToiletFilterStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA007A8C2B82162100E31ADA /* ToiletFilterStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		EA007A822B7FAD4D00E31ADA /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		EA007A842B7FB1D300E31ADA /* ToiletsDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletsDIContainer.swift; sourceTree = "<group>"; };
 		EA007A8A2B7FB40500E31ADA /* ToiletsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletsCoordinator.swift; sourceTree = "<group>"; };
+		EA007A8C2B82162100E31ADA /* ToiletFilterStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletFilterStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				EA007A762B7F9EF100E31ADA /* Toilet.swift */,
+				EA007A8C2B82162100E31ADA /* ToiletFilterStatus.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				EA007A702B7F7D9B00E31ADA /* NetworkService.swift in Sources */,
 				EA007A802B7FACEA00E31ADA /* ToiletViewCell.swift in Sources */,
 				EA007A832B7FAD4D00E31ADA /* CGFloat+Extensions.swift in Sources */,
+				EA007A8D2B82162100E31ADA /* ToiletFilterStatus.swift in Sources */,
 				EA007A5C2B7F6E8B00E31ADA /* Endpoint.swift in Sources */,
 				EA007A1F2B7F615D00E31ADA /* ToiletListViewController.swift in Sources */,
 				EA007A1B2B7F615D00E31ADA /* AppDelegate.swift in Sources */,

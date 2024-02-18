@@ -9,6 +9,18 @@ import Foundation
 import UIKit
 
 final class AppAppearance {
+    static func setupAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().prefersLargeTitles = true
+    }
+}
 
-    static func setupAppearance() {}
+extension UINavigationController {
+    @objc override open var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }

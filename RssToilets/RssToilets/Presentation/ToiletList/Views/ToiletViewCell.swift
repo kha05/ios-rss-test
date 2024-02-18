@@ -39,7 +39,7 @@ final class ToiletViewCell: UITableViewCell {
     private lazy var stackViewIcon: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         stackView.axis = .horizontal
         stackView.spacing = .paddingSmall
         return stackView
@@ -79,12 +79,12 @@ final class ToiletViewCell: UITableViewCell {
     // MARK: - Configure
 
     func configure(with viewModel: ToiletViewModel) {
-        addressLabel.text = "📍 " + viewModel.address
-        openingHourLabel.text = "🕘 " + viewModel.openingHour
-        wcIcon.text = "🚾"
+        addressLabel.text = viewModel.adressText
+        openingHourLabel.text = viewModel.openingHourText
+        wcIcon.text = viewModel.wcText
         distanceLabel.text = viewModel.distance
         if viewModel.isPrmFriendly {
-            isAccessiblePrmIcon.text = "♿️"
+            isAccessiblePrmIcon.text = viewModel.prmText
             stackViewIcon.addArrangedSubview(isAccessiblePrmIcon)
         }
     }
@@ -113,20 +113,20 @@ private extension ToiletViewCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             addressLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .padding),
-            addressLabel.topAnchor.constraint(equalTo: topAnchor, constant: .paddingSmall),
             addressLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.padding),
+            addressLabel.topAnchor.constraint(equalTo: topAnchor, constant: .padding),
 
             openingHourLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: .paddingSmall),
-            openingHourLabel.leadingAnchor.constraint(equalTo: addressLabel.leadingAnchor),
+            openingHourLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .padding),
+            openingHourLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+
+            stackViewIcon.topAnchor.constraint(equalTo: openingHourLabel.bottomAnchor, constant: .padding),
+            stackViewIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .padding),
+            stackViewIcon.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.padding),
 
             distanceLabel.topAnchor.constraint(equalTo: openingHourLabel.bottomAnchor, constant: .paddingSmall),
             distanceLabel.leadingAnchor.constraint(equalTo: openingHourLabel.leadingAnchor),
-            distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.padding),
-
-            stackViewIcon.topAnchor.constraint(equalTo: openingHourLabel.topAnchor),
-            stackViewIcon.leadingAnchor.constraint(equalTo: openingHourLabel.trailingAnchor,
-                                                     constant: .padding),
-            stackViewIcon.bottomAnchor.constraint(equalTo: openingHourLabel.bottomAnchor)
+            distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.padding)
         ])
     }
 }

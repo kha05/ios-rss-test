@@ -9,8 +9,8 @@ import Foundation
 import CoreLocation
 
 struct Toilet {
-    let address: String
-    let openTime: String
+    let address: String?
+    let openTime: String?
     let pmrAccess: Bool
     let geolocalisation: CLLocation
 }
@@ -18,8 +18,8 @@ struct Toilet {
 extension RemoteToilet {
     func toDomain() -> Toilet {
         return Toilet(
-            address: adresse ?? "",
-            openTime: horaire?.rawValue ?? "",
+            address: adresse,
+            openTime: horaire?.rawValue,
             pmrAccess: accesPmr?.boolean ?? false,
             geolocalisation: CLLocation(latitude: geoPoint2D[0], longitude: geoPoint2D[1])
         )

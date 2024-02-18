@@ -9,14 +9,19 @@ import Foundation
 
 protocol ToiletListPresenter {
     var didUpdate: (() -> Void)? { get set }
-    var viewModels: [ToiletViewModel] { get }
+    var viewModelsFiltered: [ToiletViewModel] { get set }
+    var filterStatus: FilterStatus { get set }
 
     func fetchToilets()
+    func filter()
 }
 
 final class ToiletListPresenterImpl: ToiletListPresenter {
     private let useCase: ToiletListUseCase
-    var viewModels: [ToiletViewModel] = []
+    private var viewModels: [ToiletViewModel] = []
+    
+    var viewModelsFiltered: [ToiletViewModel] = []
+    var filterStatus = FilterStatus.all
 
     public var didUpdate: (() -> Void)? = nil
 
@@ -27,9 +32,25 @@ final class ToiletListPresenterImpl: ToiletListPresenter {
     func fetchToilets() {
         Task.init {
             self.viewModels = await useCase.fetchToilets().map({ $0.toViewModel(with: nil) })
+            self.viewModelsFiltered = viewModels
             await MainActor.run {
                 didUpdate?()
             }
         }
+    }
+
+    func filter() {
+        switch filterStatus {
+        case .all:
+            viewModelsFiltered = viewModels
+            filterStatus = .prm
+        case .prm:
+            viewModelsFiltered = viewModels.filter({ $0.isPrmFriendly })
+            filterStatus = .nonPrm
+        case .nonPrm:
+            viewModelsFiltered = viewModels.filter({ !$0.isPrmFriendly })
+            filterStatus = .all
+        }
+        didUpdate?()
     }
 }
