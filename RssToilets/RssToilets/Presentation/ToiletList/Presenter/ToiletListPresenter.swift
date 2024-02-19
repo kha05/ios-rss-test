@@ -16,6 +16,8 @@ protocol ToiletListPresenter {
 
     func fetchToilets()
     func filter()
+    func showToiletDetail(index: Int)
+    func bindWith(coordinator: ToiletsCoordinatorDelegate)
 }
 
 final class ToiletListPresenterImpl: ToiletListPresenter {
@@ -23,6 +25,8 @@ final class ToiletListPresenterImpl: ToiletListPresenter {
     private var appLocation: AppLocation
     private var viewModels: [ToiletViewModel] = []
     
+    internal weak var delegate: ToiletsCoordinatorDelegate?
+
     var viewModelsFiltered: [ToiletViewModel] = []
     var filterStatus = FilterStatus.all
 
@@ -58,6 +62,16 @@ final class ToiletListPresenterImpl: ToiletListPresenter {
             filterStatus = .all
         }
         didUpdate?()
+    }
+
+    func showToiletDetail(index: Int) {
+        guard index < viewModelsFiltered.count else { return }
+        let toiletViewModelSelected = viewModelsFiltered[index]
+        delegate?.showToiletDetails(toilet: toiletViewModelSelected)
+    }
+
+    func bindWith(coordinator: ToiletsCoordinatorDelegate) {
+        delegate = coordinator
     }
 }
 

@@ -9,13 +9,14 @@ import UIKit
 
 protocol ToiletsCoordinatorDependencies  {
     func makeToiletListViewController() -> ToiletListViewController
+    func makeToiletDetailsViewController(toilet: ToiletViewModel) -> UIViewController
 }
 
-protocol ToiletsCoordinator {
-    func start()
+protocol ToiletsCoordinatorDelegate: AnyObject {
+    func showToiletDetails(toilet: ToiletViewModel)
 }
 
-final class ToiletsCoordinatorImpl: ToiletsCoordinator {
+final class ToiletsCoordinatorImpl: Coordinator {
 
     private weak var navigationController: UINavigationController?
     private let dependencies: ToiletsCoordinatorDependencies
@@ -28,7 +29,14 @@ final class ToiletsCoordinatorImpl: ToiletsCoordinator {
 
     func start() {
         let viewController = dependencies.makeToiletListViewController()
+        viewController.bind(coordinator: self)
         navigationController?.pushViewController(viewController, animated: false)
     }
 }
 
+extension ToiletsCoordinatorImpl: ToiletsCoordinatorDelegate {
+    func showToiletDetails(toilet: ToiletViewModel) {
+        let viewController = dependencies.makeToiletDetailsViewController(toilet: toilet)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}

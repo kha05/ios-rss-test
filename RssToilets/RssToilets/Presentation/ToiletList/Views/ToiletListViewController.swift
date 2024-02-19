@@ -59,9 +59,8 @@ final class ToiletListViewController: UIViewController {
         presenter.fetchToilets()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        presenter.didUpdate = nil
+    func bind(coordinator: ToiletsCoordinatorDelegate) {
+        presenter.bindWith(coordinator: coordinator)
     }
 }
 
@@ -88,6 +87,7 @@ extension ToiletListViewController: UITableViewDataSource {
 
 extension ToiletListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.showToiletDetail(index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -96,7 +96,6 @@ private extension ToiletListViewController {
     func setupInterface() {
         navigationItem.rightBarButtonItem = filterButton
         navigationItem.title = "Toilet list"
-        view.backgroundColor = .clear
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([

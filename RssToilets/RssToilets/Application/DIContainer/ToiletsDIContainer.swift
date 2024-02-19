@@ -41,8 +41,16 @@ final class ToiletsDIContainer: ToiletsCoordinatorDependencies {
         ToiletListViewController(presenter: makeToiletListPresenter())
     }
 
+    // MARK: - Movie Details
+    func makeToiletDetailsViewController(toilet: ToiletViewModel) -> UIViewController {
+        // Build toilet details view controller
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .white
+        return viewController
+    }
+
     // MARK: - Coordinators
-    func makeToiletsCoordinator(navigationController: UINavigationController) -> ToiletsCoordinator {
+    func makeToiletsCoordinator(navigationController: UINavigationController) -> Coordinator {
         ToiletsCoordinatorImpl(navigationController: navigationController, dependencies: self)
     }
 }

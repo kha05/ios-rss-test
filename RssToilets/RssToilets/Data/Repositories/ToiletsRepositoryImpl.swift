@@ -30,7 +30,6 @@ extension ToiletsRepositoryImpl: ToiletsRepository {
             let response: Result<RemoteToilets?, Error> = try await remoteSource.execute(endpoint: APIEndpoints.getToilets(with: request))
             switch response {
             case let .success(remoteData):
-                print(remoteData)
                 return remoteData?.records.compactMap({ $0.fields }) ?? []
             case .failure(let error):
                 throw error

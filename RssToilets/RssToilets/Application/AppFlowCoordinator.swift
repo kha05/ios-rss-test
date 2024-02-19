@@ -7,10 +7,15 @@
 
 import UIKit
 
-final class AppFlowCoordinator {
+protocol Coordinator {
+    func start()
+}
+
+final class AppFlowCoordinator: Coordinator {
 
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
+    private var startCoordinator: Coordinator?
 
     init(
         navigationController: UINavigationController,
@@ -22,7 +27,7 @@ final class AppFlowCoordinator {
 
     func start() {
         let toiletsDIContainer = appDIContainer.makeToiletListDIContainer()
-        let flow = toiletsDIContainer.makeToiletsCoordinator(navigationController: navigationController)
-        flow.start()
+        startCoordinator = toiletsDIContainer.makeToiletsCoordinator(navigationController: navigationController)
+        startCoordinator?.start()
     }
 }
