@@ -19,8 +19,23 @@ protocol AppLocationDelegate: AnyObject {
     func didUpdateLocation()
 }
 
-final class AppLocationImpl: NSObject, AppLocation {    
-    private var lastLocation: CLLocation?
+final class AppLocationImpl: NSObject, AppLocation {
+    enum Constant {
+        static let keyLocation = "keyLocation"
+    }
+
+    private var lastLocation: CLLocation? {
+        get {
+            guard let coordinates = UserDefaults.standard.value(forKey: Constant.keyLocation) as? [Double] else { return nil }
+            return CLLocation(latitude: coordinates[0], longitude: coordinates[1])
+        }
+        set {
+            guard let newValue else { return }
+            let coordinates: [Double] = [newValue.coordinate.latitude, newValue.coordinate.longitude]
+            UserDefaults.standard.setValue(coordinates, forKey: Constant.keyLocation)
+        }
+    }
+
     weak var delegate: AppLocationDelegate?
 
     private var locationManager: CLLocationManager = {
@@ -63,7 +78,6 @@ private extension AppLocationImpl {
             enableMyWhenInUseFeatures()
         default:
             print("Fail permission to get current location of user")
-
         }
         return nil
     }
@@ -86,7 +100,11 @@ extension AppLocationImpl: CLLocationManagerDelegate {
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        delegate?.didUpdateLocation()
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            delegate?.didUpdateLocation()
+        default: break
+        }
     }
 
     func locationManager(
